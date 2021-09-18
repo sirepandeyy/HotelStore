@@ -1,0 +1,51 @@
+<%- include("partials/header") %>
+<link rel="stylesheet" href="/booking.css">
+
+
+
+<div class="container" style="text-align: center;">
+
+	<h1>Create a new Hotel</h1>
+	<div class="row">
+	
+		<div style="width:30%;margin:0 auto;"> 
+		
+		
+
+		<form action="/hotels" method="POST" enctype="multipart/form-data">
+		<div class="form-group">
+			<input class="form-control" type="text" name="hotel[name]" placeholder="name" required>
+		</div>
+		<div class="form-group">
+			<input class="form-control" type="number" name="hotel[price]" placeholder="price" min="500" step="100" required>
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Browse</span>
+		<label for="image"></label>
+		<input class="form-control" type="file" id="image" name="image" accept="image/*" multiple> 
+			</div>	
+	</div>
+		
+		<div class="form-group">
+				
+			<textarea class="form-control" type="text" name="hotel[description]" placeholder="description" ></textarea>
+		
+		</div>
+		<div class="form-group">
+			<input class="form-control" type="text" name="hotel[location]" placeholder="location" >
+		</div>
+		<div class="form-group">
+			<input class="btn  btn-outline-secondary btn-block" type="submit">
+		</div>
+		</form>
+		<a href="/hotels">Go Back</a>
+	</div>
+
+	</div>
+
+</div>
+
+
+<%-include("partials/footer")%>

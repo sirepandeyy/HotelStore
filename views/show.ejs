@@ -1,0 +1,98 @@
+<%- include("partials/header") %>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/booking.css">
+
+<div class="container">
+	<div class="row mb-5">
+
+		<div class="col-md-3">
+
+			<p class="lead">HotelStore</p>
+			<div class="list-group">
+				<li class="list-group-item active">Info 1</li>
+				<li class="list-group-item">Info 2</li>
+				<li class="list-group-item">Info 3</li>
+			</div>
+
+		</div>
+		<div class="col-md-9">
+			<div style="padding: 0;" class="img-thumbnail">
+				
+
+				<div id="splide" class="splide">
+					<div class="splide__track">
+					  <ul class="splide__list">
+						  <% for(let img of Hotel.image){ %>
+						<li class="splide__slide"><img class="img-responsive" src=" <%= img.url %>" alt="" width="100%"></li>
+						<% } %>
+					  </ul>
+					</div>
+				  
+				
+				
+				</div>
+
+
+				  <div style="padding: 9px; text-align: justify;">
+					<div  class="caption mt-3">
+						<h4 style="display: inline;float:right;">$9.00/night</h4>
+						<h4 ><a href=""><%= Hotel.name %></a></h4>
+					</div>
+		
+					<p>
+
+						<%= Hotel.description %>
+					</p>
+		
+					<p>
+						<div class="meta" style="text-align: right;"> 
+							<span class="date">Created on <%= hotel.created.toDateString() %></span>
+						  </div>
+						
+						<em>Submitted by <%= Hotel.username %></em>
+					</p>
+		
+				
+				</div>
+
+			</div>
+			
+			</div>
+		
+			<div class="card card-body bg-light mt-3">
+				<div class="text-right">
+					<a class="btn btn-success" href="/hotels/<%= hotel._id %>/comments/new">Add a new Comment</a>
+				</div>
+
+				<hr>
+
+				<% Hotel.comments.forEach(function(comment){ %>
+	
+						<div class="row mt-4">
+							<div class="col-md-12">
+
+								<strong><%= comment.author.username %></strong>
+								<span style="display:inline;float: right;">10 days ago</span>
+								<p>
+									<%= comment.text %>
+								</p>
+							</div>
+						</div>
+	
+					<%})%>
+			</div>
+
+
+		</div>
+		
+
+	</div>
+
+
+<%- include("partials/footer") %>
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+
+<%- include("./partials/header") %>
+
+<head>
+ 
+    <link rel="stylesheet" href="/booking.css">
+  
+
+</head>
+
+
+
+
+<h1 class="text-center ">This is the LogIn form</h1>
+
+        
+<div class="ui main text container segment">
+    <div class="ui huge header">HotelStore</div>
+
+    <form class="ui form" action="/login" method="POST">
+    <div class="field">
+        <label >username </label>
+    <input type="text" name="username" placeholder="username" required>
+    </div>
+    <div class="field">
+        <label>password</label>
+    <input name="password" type="password"  placeholder="password" required>
+    </div>
+    <div class="field">
+        <label>Admin</label>
+    <input name="adminCode" type="password"  placeholder="@adminCode" >
+    </div>
+
+    <div class="field">
+        <button class="ui violet big basic button" type="submit">Submit</button>
+    </div>
+    </form>
+
+    <%- include("partials/footer") %>

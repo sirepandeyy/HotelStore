@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>book the hotel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://checkout.stripe.com/checkout.js" defer> </script>
+  <link rel="stylesheet" href="/booking.css">
+  <link rel="stylesheet" href="/stars.css">
+  
+</head>
+
+<body>
+
+  <%- include("partials/header") %>
+  
+  
+
+  <div class="container">
+    <div class="row mb-5 mt-2">
+  
+      <div class="col-md-4">
+  
+        <p class="lead">HotelStore</p>
+        <div class="list-group mb-3">
+          <li class="list-group-item active">Info 1</li>
+          <li class="list-group-item">Info 2</li>
+          <li class="list-group-item">Info 3</li>
+        </div>
+
+        <div id='map' style='width: 350px; height: 500px;'></div>
+        
+      </div>
+      <div class="col-md-8">
+
+        
+        <div id="splide" class="splide">
+          <div class="splide__track">
+            <ul class="splide__list">
+						  <% for(let img of Hotel.image){ %>
+						<li class="splide__slide"><img class="img-responsive" src=" <%= img.url %>" alt="" width="100%"></li>
+            <% } %>
+      
+					  </ul>
+          </div>
+          </div>
+
+        <div style="padding: 0;font-family: 'Quicksand' ,sans-serif;" class="img-thumbnail mb-5">
+          
+  
+
+            <div style="padding: 9px; text-align: justify;">
+              <div  class="caption mt-3">
+                <h4 style="display: inline;float:right;"> $ <%=Hotel.price%>/night</h4>
+                <h4 ><a href=""><%= Hotel.name %></a></h4>
+              </div>
+        
+              <p class="mt-2">
+                <%= Hotel.description %>
+              </p>
+              <hr>
+    
+              
+           <div class="description">
+          <p><%=Hotel.location%></p>
+          <h1><%=  %></h1>
+            </div>	
+
+
+              <hr>
+              <p>
+                <div class="meta" style="display: inline;float: right;"> 
+                  <span class="date">Created on <%= Hotel.created.toDateString() %></span>
+                  </div>
+                
+                <em>Submitted by <%= Hotel.author.username %></em>
+              </p>
+
+
+		<%	if( currentUser && Hotel.author.id.equals(currentUser.id) || currentUser && currentUser.isAdmin){ %>
+			<a class="btn btn-warning" href="/hotels/<%= Hotel._id %>/edit">Edit</a>
+		<form id="del" action="/hotels/<%= Hotel._id %>?_method=DELETE" method="POST">
+		<button  class="btn btn-danger" >Delete</button>
+		</form>
+		<% } %>
+            
+            </div>
+          </div>
+          <h2>Leave a Review</h2>
+          <form action="/hotels/<%= Hotel._id%>/reviews" method="POST" class="mb-3" novalidate>
+
+
+            <fieldset class="starability-basic">
+              <legend></legend>
+              <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+              <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+              <label for="first-rate1" title="Terrible">1 star</label>
+              <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+              <label for="first-rate2" title="Not good">2 stars</label>
+              <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+              <label for="first-rate3" title="Average">3 stars</label>
+              <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+              <label for="first-rate4" title="Very good">4 stars</label>
+              <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+              <label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
+
+            <div class="mb-3">
+              <label for="">Review</label>
+              <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"></textarea>
+              <div class="valid-feedback">
+                Looks good!!
+              </div>
+            </div>
+            
+          <button class="btn btn-success">Submit</button>
+            
+          </form>
+          
+          
+          <% for(let review of Hotel.reviews){ %>
+          <div class="card mb-3">
+          <div class="card-title mt-2 ml-3">
+                <h5>  Rating:<%= review.author.username%></h5>
+                <p class="starability-result" data-rating="<%=review.rating%>">
+                </p>
+          </div>
+          
+          <div class="card-body ml-3 mr-3 mb-3 p-0" style="text-align: justify;">
+               <p> Review: <%= review.body %> </p>
+               <% if ( Hotel.reviews.author._id.equals(currentUser.id) ||currentUser && currentUser.isAdmin){ %>
+               <form action="/hotels/<%=Hotel.id%>/reviews/<%=review.id%>?_method=DELETE" method="POST">
+                <button class="btn-sm btn-danger mb-2">delete</button>
+              </form>
+              <%}%>
+            </div>
+          </div>
+         
+          <%}%>
+	<!--		<div class="card card-body bg-light mt-3">
+				<div class="text-right">
+					<a class="btn btn-success" href="/hotels/<%= Hotel._id %>/comments/new">Add a new Comment</a>
+				</div>
+
+				<hr>
+
+				<% Hotel.comments.forEach(function(comment){ %>
+	
+						<div class="row mt-4">
+							<div class="col-md-12">
+
+								<strong><%= comment.author.username %></strong>
+								<span style="display:inline;float: right;">10 days ago</span>
+								<p>
+									<%= comment.text %>
+                </p>
+                						
+		<%	if( currentUser && comment.author.id.equals(currentUser.id) ){ %>
+      <a class="btn btn-sm btn-warning" href="/hotels/<%= Hotel._id %>/comments/<%= comment._id %>/edit">Edit</a>
+      <form id="del" action="/hotels/<%= Hotel._id %>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+        <button  class="btn btn-sm btn-danger" >Delete</button>
+        </form>				
+  <% } %>
+      
+							</div>
+						</div>
+	
+					<%})%>
+			</div>
+    -->
+          
+<div style="border: 1px solid #000000; box-shadow: 5px 5px 5px 5px rgba(105,105,105,.4); background-color: rgba(0,123,255,.4);width:100%;font-family: 'Quicksand' ,sans-serif;" class="container mt-5">
+	<h1 style="text-align: center;"> Make Your Reservations </h1>
+  <form class="bookForm" action="/hotels/<%=Hotel.id%>/payment" accept="payment" method="POST"> 
+          
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstname"><strong>First Name</strong></label>
+        <input type="text" class="form-control" id="firstname" name="FirstName" placeholder="FirstName" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastname"><strong>Last Name</strong></label>
+        <input type="text" class="form-control" id="lastname" name="LastName" placeholder="LastName" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="emailaddress"><strong>Email Address</strong></label>
+      <input type="email" class="form-control" id="emailaddress" name="Email" placeholder="email@mail.com" required>
+    </div>
+    <div class="form-group">
+      <label for="phone"><strong>Phone Number</strong></label>
+      <input type="tel" class="form-control" id="phone" name="PhoneNumber" pattern="[0-9]{10}" placeholder="1234567890" required>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label  for="birthday"><strong>Check in date</strong></label>
+        <input type="date" class="form-control" id="checkIn" name="checkIn" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="birthday1"><strong>check out date</strong></label>
+        <input type="date" class="form-control" id="checkOut" name="checkOut" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="room"><strong>Choose Room No</strong></label>
+      <select class="form-control" name="Rooms" id="room" required>
+        <option value="" selected disabled>Select</option>
+        <% if(Hotel.Notbooked.length === 0){ %>
+              <option value="" disabled>No rooms available</option>
+          <% } else{ %>
+         <% for(let hotel1 of Hotel.Notbooked){ %>
+               <option value="<%= hotel1%>"><%=hotel1%></option>
+         <% } }%>
+      </select>
+    </div>
+    <button id="Book" style="margin-bottom: 5px;" type="submit" class="btn btn-success">Book</button>
+    <script 
+    src="//checkout.stripe.com/v2/checkout.js"
+    class="stripe-button"
+    data-key="<%= stripePublickey %>"
+    data-amount="<%Hotel.price%>"
+    data-currency="Rs" 
+    data-name="<%=Hotel.name%>"
+    data-description="<%=Hotel.description%>" 
+    data-locale="auto" > 
+   </script>
+  </form>
+          </div>
+          </div>
+          </div>
+      
+  </div>
+</div>
+  
+  
+
+
+</body>
+</html>
+
+<script src="https://js.stripe.com/v3/"></script>
+  <script src="https://checkout.stripe.com/checkout.js" defer> </script>
+  <script>
+    var stripe = Stripe('<%= stripePublickey %>');
+   </script>
+   <script src="/stripe.js"></script>
+<script>
+  const mapToken = '<%-process.env.mapbox_public_key%>';
+  const Hotel = <%- JSON.stringify(Hotel)%>
+</script>
+<script src="/bookingMap.js"></script>
+<%- include("partials/footer") %>

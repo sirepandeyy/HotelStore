@@ -1,0 +1,27 @@
+{
+    "hotel":[
+        {
+            "id":1,
+            "name":"",
+            "price":"",
+            "image":"",
+            "description":"",
+            "address":""
+        },
+        {
+            "id":1,
+            "name":"",
+            "price":"",
+            "image":"",
+            "description":"",
+            "address":""
+        }, {
+            "id":1,
+            "name":"",
+            "price":"",
+            "image":"",
+            "description":"",
+            "address":""
+        }
+    ]
+}

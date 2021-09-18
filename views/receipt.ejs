@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Receipt</title>
+</head>
+<body>
+    <h1 style="text-align: center;">HotelStore</h1>
+    <h2 style="text-align: center; border-bottom: solid black 2px;">Receipt</h2>
+    <div class="container" >
+        <h3><strong>Customer Name: </strong><%= t.FirstName %> <%= t.LastName%></h3>
+        <h3><strong>Hotel Name: </strong><%= t.name %></h3>
+        <h3><strong>Room Number: </strong><%= t.Rooms%></h3>
+        <h3><strong>Check In Date: </strong><%= t.checkIn %></h3>
+        <h3><strong>Check Out Date: </strong><%= t.checkOut %></h3>
+        <h3><strong>Paid: Rs </strong><%= t.price %></h3>
+    </div>
+    <div style="margin-top: 5px;">
+    <h2 style="text-align: center;border-top: solid black 2px;">Thank You for Booking</h2>
+    <h2 style="text-align: center;">Have a nice stay</h2>
+</div>
+</body>
+</html>

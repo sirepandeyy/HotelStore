@@ -1,0 +1,103 @@
+<%- include("partials/header") %>
+
+<link rel="stylesheet" href="/booking.css">
+<div id="map" class="mt-3 mb-3" style="width: 100%;height:300px;"></div>
+
+<div class="container">
+<header class="jumbotron mt-5" style="  width: 100%;
+background-image: url(back2.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
+		<h1 class="ui huge header" style="font-size: 36px;" >
+	This is the HotelStore Page
+		</h1>
+		<p style="font-size: 15px;">Providing Hotels since 2020</p>
+		<a class="btn btn-primary btn-large" href="/hotels/newHotel" style="text-decoration:none;color:white;">Add a New Hotel</a>
+	
+	<form action="/hotels" method="GET" id="search" class="form-inline  mt-3">
+		<div class="form group">
+			<input type="text" class="form-control" name="search" placeholder="Search Hotel...">
+			<input type="submit" value="search" class="btn btn-default">
+		</div>
+	</form>
+
+
+</header>
+
+<div class="col md-12 mb-5">
+	<% if(noMatch !== null){ %>
+		<%=noMatch%>
+		
+		<%}%>
+</div>
+
+<div class="row " style="display: flex; flex-wrap: wrap;">	
+<% hotel.forEach(function(hotel){ %>
+	<div class="col-md-3 col-sm-6 ">
+
+
+	<div class="ui card mb-5">
+		
+		<div class="image"> 
+			<% for(let img of hotel.image){ %>
+		  <img class="img-responsive" src=" <%= img.url %>" alt="" width="100%">
+		 <% break %> 
+		  <% } %>
+		
+		</div>
+
+
+
+
+	<div class="content">
+	<div class="header">
+	<div class="caption mt-3 mb-3">
+		<h4><%= hotel.name %></h4>
+		</div>
+	
+	</div>
+<div class="description mb-3">
+	<p style="text-align: justify;" ><%= hotel.description.substring(0,100) %>...</p>
+	
+		
+<div class="meta" style=" text-align: right;"> 
+	<span> $<%= hotel.price %></span>
+  </div>
+</div>
+<hr>
+
+<div class="meta" style=" text-align: right;"> 
+	<span class="date">Created on <%= hotel.created.toDateString() %></span>
+  </div>
+
+  <hr>
+<div class="description">
+	<p><%=hotel.location %></p>
+</div>	
+
+<div class="extra content mt-3">
+
+<button class="btn btn-primary"><a href="/hotels/<%=hotel._id%>" style="text-decoration:none;color:white;">Book Now</a></button>
+</div>
+
+</div>
+
+	</div>
+
+
+
+	</div>
+
+<% });%>
+ </div>	
+
+
+</div>
+<script>
+	const mapToken = '<%-process.env.mapbox_public_key%>'
+	const Hotels = { features:<%- JSON.stringify(hotel)%>}
+	</script>
+
+	<script src="/ClusterMap.js"></script>
+	<%- include("partials/footer") %>

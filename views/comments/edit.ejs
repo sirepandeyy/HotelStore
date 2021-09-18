@@ -1,0 +1,27 @@
+<%- include("../partials/header") %>
+
+<div class="container" style="text-align: center;">
+
+	<h1>Edit Comment </h1>
+	<div class="row">
+	
+		<div style="width:30%;margin:0 auto;"> 
+		
+		
+
+		<form action="/hotels/<%= Hotel_id %>/comments/<%= comment.id %>?_method=PUT" method="POST">
+		<div class="form-group">
+			<input class="form-control" type="text" name="comment[text]" value="<%=comment.text%>" required>
+		</div>
+	
+		
+		<div class="form-group">
+			<input class="btn  btn-outline-secondary btn-block" type="submit">
+		</div>
+		</form>
+		<a href="/hotels">Go Back</a>
+	</div>
+
+	</div>
+
+</div>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/header") %> 
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to banaras</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montez&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="/booking.css">
+  
+    
+  </head>
+<body>
+    
+<% if(currentUser && currentUser.isAdmin){ %>
+   <h1> Welcome Admin </h1>
+	<%}%>
+	
+  <div class="bg">
+    
+      <div class="slider-outer">
+        <div class="slider">
+         
+          <div class="slide-item"><span class="slide-image" style="background-image: url(/Optimized-banaras2.jpg);"></span></div>
+          <div class="slide-item"><span class="slide-image" style="background-image: url(/Optimized-christine-roy-ir5MHI6rPg0-unsplash.jpg);"></span></div>
+          <div class="slide-item"><span class="slide-image" style="background-image: url(/Optimized-priscilla-du-preez-EFoH8YajQuA-unsplash.jpg);"></span></div>
+          <div class="slide-item"><span class="slide-image" style="background-image: url(/Optimized-mesut-kaya-eOcyhe5-9sQ-unsplash.jpg);"></span></div>
+       
+          
+        </div>
+      </div>
+
+      
+  
+
+    <div id="welcome">
+ 
+      <nav class="navbar navbar-expand-lg navbar-light " >
+            <a class="navbar-brand "style="font-size: 14px;" href="#">Book</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul id="nav" class="navbar-nav">
+                <li class="nav-item ">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="apartment" href="#apart">Our Apartments</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Banaras</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/team">Contacts</a>
+                </li>
+                <li class="">
+                  <a style="font-size: 15px;" class="nav-link" href="/hotels">Hotels</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          <section class="hero" id="hero">
+            <div class="container">
+              <h2 class="subheading">
+                <span class="firstletter">W</span>elcome
+              </h2>
+              <h1 class="headline">the HotelStore</h1>
+              <div class="description">
+                <div class="separator">
+                  <div class="line line-left"></div>
+                  <div class="asterik"><i class="fas fa-asterisk"></i></div>
+                  <div class="line line-right"></div>
+                </div>
+                <div class="single-animation">
+                 <h5> Ready to be Opened</h5>
+                  <a href="/hotels" class="btn cta-btn">Explore</a>
+                </div>
+
+              </div>
+            </div>
+
+          </section>
+       
+        
+    </div>
+  </div>
+
+
+
+  <section class="discover-story">
+    <div class="container">
+      <div class="rest-info">
+        <div class="rest-des padding-right animate-left">
+          <div class="global-headline">
+              <h2 class="sub-headline mt-5">
+              <span class="first-letter">D</span>iscover
+              </h2>
+              <h1 class="headline headline-dark">Our Hotels</h1>
+              <div class="asterik"><i class="fas fa-asterisk"></i></div>
+            </div>
+          <p>
+           Lorem ipsum dolor sit amet consectetur adipisicing elit. ae eveniet debitis doloribus error adipisci repellat voluptatibusmet consectetur adipisicing elit. Tempore temporibus maiores unde corporis quam? Quos, dolor illum. Expedita fuga in quos. Quod laborum tenetur sed voluptatum cupiditate ad illum hic.
+          </p>
+          <a href="#" class="btn body-btn mb-4">Have a Look</a>
+         
+     <div id="splide" class="splide">
+      <div class="splide__track">
+        <ul id="apart" class="splide__list">
+          <li class="splide__slide"><img src="/Optimized-1.jpg" width="100%"  alt=""></li>
+          <li class="splide__slide"><img src="/Optimized-2.jpg" width="100%"  alt=""></li>
+          <li class="splide__slide"><img src="/Optimized-3.jpg" width="100%"  alt=""></li>
+          <li class="splide__slide"><img src="/Optimized-4.jpg" width="100%"  alt=""></li>
+          <li class="splide__slide"><img src="/Optimized-5.jpg" width="100%"  alt=""></li>
+          <li class="splide__slide"><img src="/Optimized-6.jpg" width="100%"  alt=""></li>
+        </ul>
+      </div>
+    </div>
+        </div>
+     </section>
+
+    
+
+</body>
+<%- include("partials/footer") %>
+</html>
